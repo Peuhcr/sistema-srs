@@ -7,26 +7,29 @@ public class Usuario {
     private String matricula;
     private String email;
     private TipoUsuario tipoUsuario;
+    public Organizacao organizacao;
+    private String senhaHash;
 
 
     public enum TipoUsuario {
 
         ADMIN,
-        ORGANIZACAO,
+        MEMBRO,
     }
 
-    public Usuario() {
+    public Usuario () {
 
     }
 
 
-    public Usuario
-            (int id, String nome, String matricula, String email, TipoUsuario tipoUsuario) {
+    public Usuario (int id, String nome, String matricula, String email, TipoUsuario tipoUsuario,
+                    Organizacao organizacao) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
         this.email = email;
         this.tipoUsuario = tipoUsuario;
+        this.organizacao = organizacao;
     }
 
 
@@ -78,4 +81,15 @@ public class Usuario {
     public void setTipoUsuario (TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+
+
+    public Organizacao getOrganizacao () {
+        return organizacao;
+    }
+
+
+    public void setOrganizacao (Organizacao organizacao) {
+        this.organizacao = organizacao;
+    }
+
 }

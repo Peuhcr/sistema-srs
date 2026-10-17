@@ -20,11 +20,13 @@ public class Sala {
     public Sala () {
     }
 
-    public Sala (int id, String nome, String bloco, TipoSala tipoSala) {
+
+    public Sala (int id, String nome, String bloco, TipoSala tipoSala, int capacidade) {
         this.id = id;
         this.nome = nome;
         this.bloco = bloco;
         this.tipoSala = tipoSala;
+        this.capacidade = capacidade;
     }
 
     public int getId () {

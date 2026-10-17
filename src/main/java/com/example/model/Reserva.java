@@ -11,6 +11,9 @@ public class Reserva {
     private LocalDateTime dataInicio;
     private LocalDateTime dataFim;
     private StatusReserva status;
+    private String titulo;
+    private String descricao;
+    private Usuario aprovador;
 
 
     public enum StatusReserva {
@@ -26,13 +29,17 @@ public class Reserva {
 
 
     public Reserva (int id, Sala sala, Usuario responsavel, LocalDateTime dataInicio,
-                   LocalDateTime dataFim, StatusReserva status) {
+                    LocalDateTime dataFim, StatusReserva status, String titulo, String descricao,
+                    Usuario aprovador) {
         this.id = id;
         this.sala = sala;
         this.responsavel = responsavel;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.status = status;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.aprovador = aprovador;
     }
 
 
@@ -93,6 +100,36 @@ public class Reserva {
 
     public void setStatus (StatusReserva status) {
         this.status = status;
+    }
+
+
+    public String getTitulo () {
+        return titulo;
+    }
+
+
+    public void setTitulo (String titulo) {
+        this.titulo = titulo;
+    }
+
+
+    public String getDescricao () {
+        return descricao;
+    }
+
+
+    public void setDescricao (String descricao) {
+        this.descricao = descricao;
+    }
+
+
+    public Usuario getAprovador () {
+        return aprovador;
+    }
+
+
+    public void setAprovador (Usuario aprovador) {
+        this.aprovador = aprovador;
     }
 
 }
