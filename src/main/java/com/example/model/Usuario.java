@@ -7,7 +7,7 @@ public class Usuario {
     private String matricula;
     private String email;
     private TipoUsuario tipoUsuario;
-    public Organizacao organizacao;
+    private Organizacao organizacao;
     private String senhaHash;
 
 
@@ -17,58 +17,59 @@ public class Usuario {
         MEMBRO,
     }
 
-    public Usuario () {
 
+    public Usuario () {
     }
 
 
     public Usuario (int id, String nome, String matricula, String email, TipoUsuario tipoUsuario,
-                    Organizacao organizacao) {
+                    Organizacao organizacao, String senhaHash) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
         this.email = email;
         this.tipoUsuario = tipoUsuario;
         this.organizacao = organizacao;
+        this.senhaHash = senhaHash;
     }
 
 
-    public int getId() {
+    public int getId () {
         return id;
     }
 
 
-    public void setId(int id) {
+    public void setId (int id) {
         this.id = id;
     }
 
 
-    public String getNome() {
+    public String getNome () {
         return nome;
     }
 
 
-    public void setNome(String nome) {
+    public void setNome (String nome) {
         this.nome = nome;
     }
 
 
-    public String getMatricula() {
+    public String getMatricula () {
         return matricula;
     }
 
 
-    public void setMatricula(String matricula) {
+    public void setMatricula (String matricula) {
         this.matricula = matricula;
     }
 
 
-    public String getEmail() {
+    public String getEmail () {
         return email;
     }
 
 
-    public void setEmail(String email) {
+    public void setEmail (String email) {
         this.email = email;
     }
 
@@ -90,6 +91,16 @@ public class Usuario {
 
     public void setOrganizacao (Organizacao organizacao) {
         this.organizacao = organizacao;
+    }
+
+
+    public String getSenhaHash () {
+        return senhaHash;
+    }
+
+
+    public void setSenhaHash (String senhaHash) {
+        this.senhaHash = senhaHash;
     }
 
 }

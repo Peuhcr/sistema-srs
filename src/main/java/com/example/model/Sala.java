@@ -12,12 +12,13 @@ public class Sala {
     public enum TipoSala {
 
         LABORATORIO,
-        SALA_DE_AULA_PADRAO,
-        SALA_DE_AULA_GEMINADA,
+        SALA_PADRAO,
+        SALA_GEMINADA,
 
     }
 
     public Sala () {
+
     }
 
 

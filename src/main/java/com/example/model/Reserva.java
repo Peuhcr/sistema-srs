@@ -8,12 +8,14 @@ public class Reserva {
     private int id;
     private Sala  sala;
     private Usuario responsavel;
+    private Organizacao organizacao;
     private LocalDateTime dataInicio;
     private LocalDateTime dataFim;
     private StatusReserva status;
     private String titulo;
     private String descricao;
     private Usuario aprovador;
+    private int numParticipantes;
 
 
     public enum StatusReserva {
@@ -28,18 +30,20 @@ public class Reserva {
     }
 
 
-    public Reserva (int id, Sala sala, Usuario responsavel, LocalDateTime dataInicio,
-                    LocalDateTime dataFim, StatusReserva status, String titulo, String descricao,
-                    Usuario aprovador) {
+    public Reserva (int id, Sala sala, Usuario responsavel, Organizacao organizacao,
+                    LocalDateTime dataInicio, LocalDateTime dataFim, StatusReserva status,
+                    String titulo, String descricao, Usuario aprovador, int numParticipantes) {
         this.id = id;
         this.sala = sala;
         this.responsavel = responsavel;
+        this.organizacao = organizacao;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.status = status;
         this.titulo = titulo;
         this.descricao = descricao;
         this.aprovador = aprovador;
+        this.numParticipantes = numParticipantes;
     }
 
 
@@ -70,6 +74,16 @@ public class Reserva {
 
     public void setResponsavel (Usuario responsavel) {
         this.responsavel = responsavel;
+    }
+
+
+    public Organizacao getOrganizacao () {
+        return organizacao;
+    }
+
+
+    public void setOrganizacao (Organizacao organizacao) {
+        this.organizacao = organizacao;
     }
 
 
@@ -130,6 +144,16 @@ public class Reserva {
 
     public void setAprovador (Usuario aprovador) {
         this.aprovador = aprovador;
+    }
+
+
+    public int getNumParticipantes () {
+        return numParticipantes;
+    }
+
+
+    public void setNumParticipantes (int numParticipantes) {
+        this.numParticipantes = numParticipantes;
     }
 
 }
