@@ -2,7 +2,7 @@ package com.example.model;
 
 public class Usuario {
 
-    private int id;
+    private long id;
     private String nome;
     private String matricula;
     private String email;
@@ -22,7 +22,7 @@ public class Usuario {
     }
 
 
-    public Usuario (int id, String nome, String matricula, String email, TipoUsuario tipoUsuario,
+    public Usuario (long id, String nome, String matricula, String email, TipoUsuario tipoUsuario,
                     Organizacao organizacao, String senhaHash) {
         this.id = id;
         this.nome = nome;
@@ -34,12 +34,12 @@ public class Usuario {
     }
 
 
-    public int getId () {
+    public long getId () {
         return id;
     }
 
 
-    public void setId (int id) {
+    public void setId (long id) {
         this.id = id;
     }
 

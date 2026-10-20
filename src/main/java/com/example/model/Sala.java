@@ -2,7 +2,7 @@ package com.example.model;
 
 public class Sala {
 
-    private int id;
+    private long id;
     private String nome;
     private String bloco;
     private TipoSala tipoSala;
@@ -22,7 +22,7 @@ public class Sala {
     }
 
 
-    public Sala (int id, String nome, String bloco, TipoSala tipoSala, int capacidade) {
+    public Sala (long id, String nome, String bloco, TipoSala tipoSala, int capacidade) {
         this.id = id;
         this.nome = nome;
         this.bloco = bloco;
@@ -30,11 +30,11 @@ public class Sala {
         this.capacidade = capacidade;
     }
 
-    public int getId () {
+    public long getId () {
         return id;
     }
 
-    public void setId (int id) {
+    public void setId (long id) {
         this.id = id;
     }
 

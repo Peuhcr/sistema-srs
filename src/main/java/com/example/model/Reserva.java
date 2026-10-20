@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Reserva {
 
-    private int id;
+    private long id;
     private Sala  sala;
     private Usuario responsavel;
     private Organizacao organizacao;
@@ -30,7 +30,7 @@ public class Reserva {
     }
 
 
-    public Reserva (int id, Sala sala, Usuario responsavel, Organizacao organizacao,
+    public Reserva (long id, Sala sala, Usuario responsavel, Organizacao organizacao,
                     LocalDateTime dataInicio, LocalDateTime dataFim, StatusReserva status,
                     String titulo, String descricao, Usuario aprovador, int numParticipantes) {
         this.id = id;
@@ -47,12 +47,12 @@ public class Reserva {
     }
 
 
-    public int getId () {
+    public long getId () {
         return id;
     }
 
 
-    public void setId (int id) {
+    public void setId (long id) {
         this.id = id;
     }
 

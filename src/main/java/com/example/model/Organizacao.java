@@ -2,19 +2,29 @@ package com.example.model;
 
 public class Organizacao {
 
+    private long id;
     private String nome;
     private String descricao;
-    private int quantidadeMembros;
 
 
     public Organizacao () {
     }
 
 
-    public Organizacao (String nome, String descricao, int quantidadeMembros) {
+    public Organizacao (long id, String nome, String descricao) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.quantidadeMembros = quantidadeMembros;
+    }
+
+
+    public long getId () {
+        return id;
+    }
+
+
+    public void setId (long id) {
+        this.id = id;
     }
 
 
@@ -35,16 +45,6 @@ public class Organizacao {
 
     public void setDescricao (String descricao) {
         this.descricao = descricao;
-    }
-
-
-    public int getQuantidadeMembros () {
-        return quantidadeMembros;
-    }
-
-
-    public void setQuantidadeMembros (int quantidadeMembros) {
-        this.quantidadeMembros = quantidadeMembros;
     }
 
 }
