@@ -4,13 +4,9 @@ import com.example.auth.CredencialUsuario;
 import com.example.config.ConectaDb;
 import com.example.model.Organizacao;
 import com.example.model.Usuario;
-import com.example.model.Sala.TipoSala;
 import com.example.model.Usuario.TipoUsuario;
-import com.example.auth.CredencialUsuario;
-
+import com.example.exception.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -66,7 +62,7 @@ public class UsuarioDao {
                     }
 
                 TipoUsuario tipo = TipoUsuario.valueOf(
-                    rs.getString("tipo").toUpperCase());
+                    rs.getString("tipo").toUpperCase(Locale.ROOT));
 
 
                 return Optional.of(new CredencialUsuario (
@@ -79,7 +75,110 @@ public class UsuarioDao {
 
             throw new RuntimeException("Erro de autenticação com as credenciais do usuário", e);
         }
-     }
+    }
+
+    public Usuario insert (Usuario usuario) {
+
+        String sql = """
+            INSERT INTO usuarios
+                (nome, matricula, email, tipo, organizacoes_id, senha_hash)
+            VALUES (?, ?, ?, ?, ?, ?)
+            RETURNING id
+            """;
+        
+        try (Connection conn = ConectaDb.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setString(1, usuario.getNome());
+                stmt.setString(2, usuario.getMatricula());
+                stmt.setString(3, usuario.getEmail());
+                stmt.setString(4, usuario.getTipoUsuario().name().toLowerCase(Locale.ROOT));
+
+                if (usuario.getOrganizacao() == null) {
+
+                    stmt.setNull(5, Types.BIGINT);
+
+                } else {
+
+                    stmt.setLong(5, usuario.getOrganizacao().getId());
+                }
+
+                stmt.setString(6, usuario.getSenhaHash());
+
+                try (ResultSet rs = stmt.executeQuery()) {
+
+                     if (!rs.next()) {
+
+                        throw new SQLException("INSERT não retornou o id do usuário");
+                    }
+
+                    usuario.setId(rs.getLong("id"));
+                    return usuario;
+                }
+            } catch (SQLException e) {
+
+                throw new RuntimeException ("Erro ao inserir usuário", e);
+            }
+    }
+
+    private Usuario mapRow(ResultSet rs) throws SQLException {
+
+        Usuario usuario = new Usuario();
+
+        usuario.setId(rs.getLong("id"));
+        usuario.setNome(rs.getString("nome"));
+        usuario.setMatricula(rs.getString("matricula"));
+        usuario.setEmail(rs.getString("email"));
+        usuario.setTipoUsuario(
+            TipoUsuario.valueOf(rs.getString("tipo").toUpperCase(Locale.ROOT))
+        );
+
+      
+        long organizacaoId = rs.getLong("organizacao_id");
+        
+        if (!rs.wasNull()) {
+
+            usuario.setOrganizacao(new Organizacao(
+
+                organizacaoId, 
+                rs.getString("organizacao_nome"),
+                rs.getString("organizacao_descricao")
+                ));
+        }
+
+        return usuario;
+    }
+
+    public void update (Usuario usuario) {
+
+        String sql = "UPDATE usuarios SET nome = ?,  email = ?, organizacoes_id = ?, senha_hash = ?"
+            + "atualizada_em = now() WHERE id = ?";
+
+        
+        try (Connection conn = ConectaDb.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setString(1, usuario.getNome());
+                stmt.setString(2, usuario.getEmail());
+                stmt.setLong(3, usuario.getOrganizacao().getId());
+                stmt.setString(4, usuario.getSenhaHash());
+
+            
+        } catch (SQLException e) {
+
+            if ("23505".equals(e.getSQLState())) {
+
+                throw new EmailJaCadastradoException(usuario.getEmail(), e);
+            }
+
+            throw new RuntimeException("Erro ao atualizar usuário" +
+                usuario.getId(), e
+            );
+        }
+
+
+
+    }
 
 
   
