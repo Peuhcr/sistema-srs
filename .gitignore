@@ -37,3 +37,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Requirements ###
+
+src\main\java\com\example\service\REQUIREMENTS.md
+src\main\java\com\example\dao\REQUIREMENTS.md
